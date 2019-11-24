@@ -34,31 +34,31 @@ Ferramenta padrão de log do java em Console.
 
 # 3. Estrutura de pacotes do Projeto
 
- fiap.telegram
+ fiap.chatbot
  - Pacote principal com os arquivos do projeto.
 
- fiap.telegram.bot
+ fiap.chatbot.bot
  - Pacote com a inteligência do Bot para buscar as mensagens do telegram.
 
- fiap.telegram.command
+ fiap.chatbot.command
  - Pacote com todas as classes de comandos a serem executados.
 
- fiap.telegram.comparator
+ fiap.chatbot.comparator
  - Pacote com o comparator de cliente.
 
- fiap.telegram.constants
+ fiap.chatbot.constants
  - Pacote de constantes
 
- fiap.telegram.manager
+ fiap.chatbot.manager
  - Pacote com o gerenciador de envio de mensagens ao telegram e gerenciamento da sessão do cliente.
 
- fiap.telegram.model
+ fiap.chatbot.model
  - Pacote com a camada model
 
- fiap.telegram.prevayler
+ fiap.chatbot.prevayler
  - Pacote prevlayer de persistência em arquivo.
 
- fiap.telegram.utils
+ fiap.chatbot.utils
  - Pacote de Utilidades
 
 
