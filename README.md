@@ -1,13 +1,12 @@
-# chatbot-fiap-telegram
+# Projeto FIAP ChatBot com Telegram
 Projeto Java Platform - ChatBot 
 
-Novembro de 2019.
-FIAP
+Elaborado em Novembro de 2019
 
 # Objetivo
 
-O objetivo desta atividade é criar um bot com o Telegram que simule um assistente pessoal de um banco.
-Serão implementados os comportamentos básicos de um banco, como depositar,sacar,abrir conta,etc...
+O objetivo deste projeto é criar um bot com o Telegram que simule um assistente pessoal de um banco.
+Serão implementados os comportamentos básicos de um banco, como depositar,sacar,abrir conta, dentre outras funcionalidades.
 
 # 2. Componentes e Frameworks
 
@@ -93,7 +92,7 @@ Ferramenta padrão de log do java em Console.
 
 # Executando o projeto
 
-No diretório **src** no pacote **br.fiap.telegram** existe um arquivo chamado **Main.java** . Abra esse arquivo e execute **Run**
+Acessar o diretório **src** no pacote **br.fiap.chatbot** existe um arquivo chamado **Main.java** . Abra esse arquivo e execute **Run**
 
  
 # Javadoc
