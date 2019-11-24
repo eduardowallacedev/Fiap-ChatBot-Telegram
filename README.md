@@ -98,7 +98,7 @@ No diretório **src** no pacote **br.fiap.telegram** existe um arquivo chamado *
  
 # Javadoc
 
-[Acesse clicando aqui](docs/javadoc/index.html)
+[Acesse clicando aqui](doc/index.html)
 
 
 # Referências
