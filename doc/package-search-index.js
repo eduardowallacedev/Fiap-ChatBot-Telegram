@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"br.fiap.telegram"},{"l":"br.fiap.telegram.bot"},{"l":"br.fiap.telegram.command"},{"l":"br.fiap.telegram.comparator"},{"l":"br.fiap.telegram.constants"},{"l":"br.fiap.telegram.manager"},{"l":"br.fiap.telegram.model"},{"l":"br.fiap.telegram.prevayler"},{"l":"br.fiap.telegram.utils"}]
