@@ -4,7 +4,7 @@ import br.fiap.telegram.manager.BotManager;
 import br.fiap.telegram.manager.SessionManager;
 import br.fiap.telegram.model.Cliente;
 
-public class ComandoDeposito implements Opcoes {
+public class Deposito implements Opcoes {
 
 	@Override
 	public void processar(Cliente cliente) throws Exception {
@@ -14,11 +14,11 @@ public class ComandoDeposito implements Opcoes {
 					"Você não possui conta cadastrada!" + "\nCrie uma conta antes de continuar. /abrirconta");
 			cliente.setComandoAtual(null);
 			SessionManager.addClient(cliente);
-			ComandoStart.mostrarMenu(cliente);
+			Start.mostrarMenu(cliente);
 			return;
 		}
 
-		boolean isComando = ComandoEnum.getByCodigo(cliente.getMensagemAtual()) != null;
+		boolean isComando = Enum.getByCodigo(cliente.getMensagemAtual()) != null;
 
 		if (cliente.getEstadoAtual() == null || "".equals(cliente.getEstadoAtual()) || isComando) {
 			cliente.setMensagemAtual("");
@@ -52,7 +52,7 @@ public class ComandoDeposito implements Opcoes {
 
 			BotManager.enviarMensagem(cliente.getChatId(),
 					"Depósito efetuado com sucesso! :)\nSaldo atual: R$ " + cliente.getConta().getSaldo());
-			ComandoStart.mostrarMenu(cliente);
+			Start.mostrarMenu(cliente);
 
 		} catch (Exception e) {
 			BotManager.enviarMensagem(cliente.getChatId(), "Valor inválido! Tente novamente!");

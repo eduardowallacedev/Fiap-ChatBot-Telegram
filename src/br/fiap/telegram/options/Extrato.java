@@ -1,4 +1,3 @@
-
 package br.fiap.telegram.options;
 
 import java.util.List;
@@ -8,24 +7,21 @@ import br.fiap.telegram.manager.SessionManager;
 import br.fiap.telegram.model.Cliente;
 import br.fiap.telegram.model.Lancamento;
 
-public class ComandoRetiradas implements Comando {
+public class Extrato implements Opcoes {
 
 	@Override
 	public void processar(Cliente cliente) throws Exception {
 
 		if (!clientePossuiConta(cliente)) {
 			BotManager.enviarMensagem(cliente.getChatId(),
-			        "VocÃª nÃ£o possui conta cadastrada!" + "\nCrie uma conta antes de continuar. /abrirconta");
+					"Você não possui conta cadastrada!" + "\nCrie uma conta antes de continuar. /abrirconta");
 			cliente.setComandoAtual(null);
-
 			SessionManager.addClient(cliente);
-
-			ComandoStart.mostrarMenu(cliente);
+			Start.mostrarMenu(cliente);
 			return;
-
 		}
 
-		retiradas(cliente);
+		exibirExtrato(cliente);
 
 	}
 
@@ -33,29 +29,31 @@ public class ComandoRetiradas implements Comando {
 		return cliente.getConta() != null;
 	}
 
-	private void retiradas(Cliente cliente) throws Exception {
+	private void exibirExtrato(Cliente cliente) throws Exception {
 
-		List<Lancamento> retiradas = cliente.getConta().retiradas();
+		List<Lancamento> extrato = cliente.getConta().extrato();
 
-		if (retiradas != null && !retiradas.isEmpty()) {
+		if (!extrato.isEmpty()) {
 
-			double somaRetiradas = 0f;
 			StringBuilder sb = new StringBuilder();
 
-			for (Lancamento lc : retiradas) {
-
+			for (Lancamento lc : extrato) {
 				sb.append(lc.getExtrato());
 				sb.append("\n");
-
-				somaRetiradas += lc.getValor();
 			}
 
-			sb.append("\nTotal Retiradas: R$ " + somaRetiradas);
+			sb.append("Saldo atual: R$ " + cliente.getConta().getSaldo());
 
 			BotManager.enviarMensagem(cliente.getChatId(), sb.toString());
 
 		} else {
-			BotManager.enviarMensagem(cliente.getChatId(), "VocÃª nÃ£o possui retiradas!");
+
+			if (cliente.getConta().getSaldo() < 1f) {
+				BotManager.enviarMensagem(cliente.getChatId(),
+						"Saldo insuficiente para o extrato! :(\nSaldo atual: R$ " + cliente.getConta().getSaldo());
+			} else {
+				BotManager.enviarMensagem(cliente.getChatId(), "não há informações para exibir");
+			}
 		}
 
 		cliente.setMensagemAtual(null);
@@ -64,7 +62,7 @@ public class ComandoRetiradas implements Comando {
 
 		SessionManager.addClient(cliente);
 
-		ComandoStart.mostrarMenu(cliente);
+		Start.mostrarMenu(cliente);
 
 	}
 }

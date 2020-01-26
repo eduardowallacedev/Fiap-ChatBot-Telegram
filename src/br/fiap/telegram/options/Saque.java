@@ -4,24 +4,24 @@ import br.fiap.telegram.manager.BotManager;
 import br.fiap.telegram.manager.SessionManager;
 import br.fiap.telegram.model.Cliente;
 
-public class ComandoSaque implements Comando {
+public class Saque implements Opcoes {
 
 
     @Override
     public void processar(Cliente cliente) throws Exception {
 
         if (!clientePossuiConta(cliente)) {
-            BotManager.enviarMensagem(cliente.getChatId(), "Voc√™ n√£o possui conta cadastrada!" +
+            BotManager.enviarMensagem(cliente.getChatId(), "VocÍ n„o possui conta cadastrada!" +
                     "\nCrie uma conta antes de continuar. /abrirconta");
             cliente.setComandoAtual(null);
             
             SessionManager.addClient(cliente);
             
-            ComandoStart.mostrarMenu(cliente);
+            Start.mostrarMenu(cliente);
             return;
         }
 
-        boolean isComando = ComandoEnum.getByCodigo(cliente.getMensagemAtual()) != null;
+        boolean isComando = Enum.getByCodigo(cliente.getMensagemAtual()) != null;
 
         if (cliente.getEstadoAtual() == null || "".equals(cliente.getEstadoAtual()) || isComando) {
             cliente.setMensagemAtual("");
@@ -41,7 +41,7 @@ public class ComandoSaque implements Comando {
     private void sacar(Cliente cliente) {
 
         if (cliente.getMensagemAtual().trim().equals("")) {
-            BotManager.enviarMensagem(cliente.getChatId(), "Informe o valor a ser sacado (ser√° cobrada uma taxa)");
+            BotManager.enviarMensagem(cliente.getChatId(), "Informe o valor a ser sacado (ser· cobrada uma taxa)");
             return;
         }
 
@@ -60,10 +60,10 @@ public class ComandoSaque implements Comando {
             
             SessionManager.addClient(cliente);
 
-            ComandoStart.mostrarMenu(cliente);
+            Start.mostrarMenu(cliente);
 
         } catch (Exception e) {
-            BotManager.enviarMensagem(cliente.getChatId(), "Valor inv√°lido! Tente novamente!");
+            BotManager.enviarMensagem(cliente.getChatId(), "Valor inv·lido! Tente novamente!");
         }
     }
 }

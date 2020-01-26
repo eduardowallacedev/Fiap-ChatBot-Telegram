@@ -1,6 +1,6 @@
 package br.fiap.telegram.options;
 
-public enum ComandoEnum {
+public enum Enum {
 
 	 START("/start", "Inicio com menu de boas vindas")
 	,ABRIR_CONTA("/abrirconta", "Abrir uma nova conta")
@@ -17,13 +17,13 @@ public enum ComandoEnum {
 	public String codigo;
 	public String descricao;
 
-	ComandoEnum(String codigo, String descricao) {
+	Enum(String codigo, String descricao) {
 		this.codigo = codigo;
 		this.descricao = descricao;
 	}
 
-	public static ComandoEnum getByCodigo(String codigo) {
-		for (ComandoEnum comandoEnum : ComandoEnum.values()) {
+	public static Enum getByCodigo(String codigo) {
+		for (Enum comandoEnum : Enum.values()) {
 			if (comandoEnum.codigo.equals(codigo)) {
 				return comandoEnum;
 			}

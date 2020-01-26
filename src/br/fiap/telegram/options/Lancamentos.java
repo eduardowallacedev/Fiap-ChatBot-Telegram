@@ -9,19 +9,19 @@ import br.fiap.telegram.manager.SessionManager;
 import br.fiap.telegram.model.Cliente;
 import br.fiap.telegram.model.Lancamento;
 
-public class ComandoLancamentos implements Comando {
+public class Lancamentos implements Opcoes {
 
 	@Override
 	public void processar(Cliente cliente) throws Exception {
 
 		if (!clientePossuiConta(cliente)) {
 			BotManager.enviarMensagem(cliente.getChatId(),
-					"VocÃª nÃ£o possui conta cadastrada!" + "\nCrie uma conta antes de continuar. /abrirconta");
+					"Você não possui conta cadastrada!" + "\nCrie uma conta antes de continuar. /abrirconta");
 			cliente.setComandoAtual(null);
 
 			SessionManager.addClient(cliente);
 
-			ComandoStart.mostrarMenu(cliente);
+			Start.mostrarMenu(cliente);
 			return;
 		}
 
@@ -47,17 +47,17 @@ public class ComandoLancamentos implements Comando {
 
 			StringBuilder sb = new StringBuilder();
 
-			sb.append("Resumo de lanÃ§amentos");
+			sb.append("Resumo de lançamentos");
 			sb.append("\n");
 			sb.append("\n");
-			sb.append("Total de lanÃ§amentos: " + lancamentos.size());
+			sb.append("Total de lançamentos: " + lancamentos.size());
 			sb.append("\n");
 
 			List<Lancamento> lancamentosSaque = lancamentos.stream().filter(o -> o.getDescricao().startsWith("Saque"))
 					.collect(Collectors.toList());
 
 			List<Lancamento> lancamentosDeposito = lancamentos.stream()
-					.filter(o -> o.getDescricao().startsWith("DepÃ³sito")).collect(Collectors.toList());
+					.filter(o -> o.getDescricao().startsWith("Depósito")).collect(Collectors.toList());
 
 			List<Lancamento> lancamentosExtrato = lancamentos.stream()
 					.filter(o -> o.getDescricao().startsWith("Extrato")).collect(Collectors.toList());
@@ -74,14 +74,14 @@ public class ComandoLancamentos implements Comando {
 
 			sb.append("\nValor Depositado: R$ " + somaDepositos);
 			sb.append("\nValor Sacado: R$ " + somaSaques);
-			sb.append("\n\nTotal de DepÃ³sito: " + totalDepositos);
+			sb.append("\n\nTotal de Depósito: " + totalDepositos);
 			sb.append("\nTotal de Saques: " + totalSaques);
 			sb.append("\nTotal de Extratos: " + lancamentosExtrato.size());
 
 			BotManager.enviarMensagem(cliente.getChatId(), sb.toString());
 
 		} else {
-			BotManager.enviarMensagem(cliente.getChatId(), "VocÃª nÃ£o possui possui lanÃ§amentos!");
+			BotManager.enviarMensagem(cliente.getChatId(), "Você não possui possui lançamentos!");
 		}
 
 		cliente.setMensagemAtual(null);
@@ -90,7 +90,7 @@ public class ComandoLancamentos implements Comando {
 
 		SessionManager.addClient(cliente);
 
-		ComandoStart.mostrarMenu(cliente);
+		Start.mostrarMenu(cliente);
 
 	}
 }

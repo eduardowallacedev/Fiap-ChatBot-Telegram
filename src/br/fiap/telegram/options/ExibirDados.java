@@ -5,18 +5,18 @@ import br.fiap.telegram.manager.BotManager;
 import br.fiap.telegram.manager.SessionManager;
 import br.fiap.telegram.model.Cliente;
 
-public class ComandoExibirDados implements Comando {
+public class ExibirDados implements Opcoes {
 
 	@Override
 	public void processar(Cliente cliente) throws Exception {
 
 		if (!clientePossuiConta(cliente)) {
 			BotManager.enviarMensagem(cliente.getChatId(),
-					"VocÃª nÃ£o possui conta cadastrada!" + "\nCrie uma conta antes de continuar. /abrirconta");
+					"Você não possui conta cadastrada!" + "\nCrie uma conta antes de continuar. /abrirconta");
 			cliente.setComandoAtual(null);
 			SessionManager.addClient(cliente);
 			SessionManager.addClient(cliente);
-			ComandoStart.mostrarMenu(cliente);
+			Start.mostrarMenu(cliente);
 			return;
 		}
 
@@ -35,7 +35,7 @@ public class ComandoExibirDados implements Comando {
 		msg.append("Ag: " + cliente.getConta().getNumAg() + "\nCc: " + cliente.getConta().getNumCc()
 				+ "\nSaldo atual: R$ " + cliente.getConta().getSaldo());
 
-		msg.append("\n\nInformaÃ§Ãµes do Titular:" + "\nNome: " + cliente.getNome() + "\nCPF: " + cliente.getCpf()
+		msg.append("\n\nInformações do Titular:" + "\nNome: " + cliente.getNome() + "\nCPF: " + cliente.getCpf()
 				+ "\nRG: " + cliente.getRg() + "\nData Nascimento: " + cliente.getDataNascFormat());
 
 		cliente.setMensagemAtual(null);
@@ -45,7 +45,7 @@ public class ComandoExibirDados implements Comando {
 		SessionManager.addClient(cliente);
 
 		BotManager.enviarMensagem(cliente.getChatId(), msg.toString());
-		ComandoStart.mostrarMenu(cliente);
+		Start.mostrarMenu(cliente);
 
 	}
 }

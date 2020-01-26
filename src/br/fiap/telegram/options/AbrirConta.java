@@ -8,7 +8,7 @@ import br.fiap.telegram.manager.SessionManager;
 import br.fiap.telegram.model.Cliente;
 import br.fiap.telegram.model.Conta;
 
-public class ComandoAbrirConta implements Opcoes {
+public class AbrirConta implements Opcoes {
 
 	@Override
 	public void processar(Cliente cliente) throws Exception {
@@ -19,11 +19,11 @@ public class ComandoAbrirConta implements Opcoes {
 			cliente.setComandoAtual(null);
 			SessionManager.addClient(cliente);
 			BotManager.enviarMensagem(cliente.getChatId(), "Você ja possui uma conta cadastrada!");
-			ComandoStart.mostrarMenu(cliente);
+			Start.mostrarMenu(cliente);
 			return;
 		}
 
-		boolean isComando = ComandoEnum.getByCodigo(cliente.getMensagemAtual()) != null;
+		boolean isComando = Enum.getByCodigo(cliente.getMensagemAtual()) != null;
 
 		if (cliente.getEstadoAtual() == null || "".equals(cliente.getEstadoAtual()) || isComando) {
 			cliente.setMensagemAtual("");
@@ -132,7 +132,7 @@ public class ComandoAbrirConta implements Opcoes {
 
 		BotManager.enviarMensagem(cliente.getChatId(), msg);
 
-		ComandoStart.mostrarMenu(cliente);
+		Start.mostrarMenu(cliente);
 	}
 
 }

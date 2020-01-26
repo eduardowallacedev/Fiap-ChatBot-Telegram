@@ -4,7 +4,7 @@ import br.fiap.telegram.manager.BotManager;
 import br.fiap.telegram.manager.SessionManager;
 import br.fiap.telegram.model.Cliente;
 
-public class ComandoAjuda implements Opcoes {
+public class Ajuda implements Opcoes {
 
 	@Override
 	public void processar(Cliente cliente) throws Exception {
@@ -15,7 +15,7 @@ public class ComandoAjuda implements Opcoes {
 
 		StringBuilder sb = new StringBuilder();
 
-		for (ComandoEnum comandoEnum : ComandoEnum.values()) {
+		for (Enum comandoEnum : Enum.values()) {
 
 			sb.append(comandoEnum.codigo + " - " + comandoEnum.descricao);
 			sb.append("\n");
@@ -30,7 +30,7 @@ public class ComandoAjuda implements Opcoes {
 
 		SessionManager.addClient(cliente);
 
-		ComandoStart.mostrarMenu(cliente);
+		Start.mostrarMenu(cliente);
 
 	}
 }

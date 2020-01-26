@@ -10,7 +10,7 @@ import br.fiap.telegram.manager.BotManager;
 import br.fiap.telegram.manager.SessionManager;
 import br.fiap.telegram.model.Cliente;
 import br.fiap.telegram.options.Comando;
-import br.fiap.telegram.options.CommandFactory;
+import br.fiap.telegram.options.Factory;
 
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -106,7 +106,7 @@ public class Bot {
 
 			cliente.setMensagemAtual(mensagem.text());
 			SessionManager.addClient(cliente);
-			Comando comando = CommandFactory.getComando(cliente);
+			Comando comando = Factory.getComando(cliente);
 			comando.processar(cliente);
 
 		} catch (Exception ex) {
