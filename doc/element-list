@@ -1,1 +1,8 @@
+br.fiap.telegram
 br.fiap.telegram.bot
+br.fiap.telegram.config
+br.fiap.telegram.DAO
+br.fiap.telegram.manager
+br.fiap.telegram.model
+br.fiap.telegram.options
+br.fiap.telegram.utils

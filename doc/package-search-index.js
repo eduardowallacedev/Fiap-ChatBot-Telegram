@@ -1,1 +1,1 @@
-packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"br.fiap.telegram.bot"}]
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"br.fiap.telegram"},{"l":"br.fiap.telegram.bot"},{"l":"br.fiap.telegram.config"},{"l":"br.fiap.telegram.DAO"},{"l":"br.fiap.telegram.manager"},{"l":"br.fiap.telegram.model"},{"l":"br.fiap.telegram.options"},{"l":"br.fiap.telegram.utils"}]
