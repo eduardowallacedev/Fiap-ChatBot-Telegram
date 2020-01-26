@@ -3,21 +3,22 @@ package br.fiap.telegram.options;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-
 import br.fiap.telegram.manager.BotManager;
 import br.fiap.telegram.manager.SessionManager;
 import br.fiap.telegram.model.Cliente;
 import br.fiap.telegram.model.Conta;
 
-public class ComandoAbrirConta implements Comando {
+public class ComandoAbrirConta implements Opcoes {
 
 	@Override
 	public void processar(Cliente cliente) throws Exception {
+		
+		// Verifica se o cliente ja tem conta
 
 		if (clientePossuiConta(cliente)) {
 			cliente.setComandoAtual(null);
 			SessionManager.addClient(cliente);
-			BotManager.enviarMensagem(cliente.getChatId(), "VocÃª ja possui uma conta cadastrada!");
+			BotManager.enviarMensagem(cliente.getChatId(), "Você ja possui uma conta cadastrada!");
 			ComandoStart.mostrarMenu(cliente);
 			return;
 		}
@@ -30,7 +31,8 @@ public class ComandoAbrirConta implements Comando {
 
 			SessionManager.addClient(cliente);
 		}
-
+		
+		// Cliente sem conta, abre uma nova conta
 		abrirConta(cliente);
 
 	}
@@ -71,7 +73,7 @@ public class ComandoAbrirConta implements Comando {
 					cliente.setEstadoAtual("informar_rg");
 					SessionManager.addClient(cliente);
 				} catch (Exception e) {
-					BotManager.enviarMensagem(cliente.getChatId(), "CPF InvÃ¡lido! Digite novamente!");
+					BotManager.enviarMensagem(cliente.getChatId(), "CPF Inválido! Digite novamente!");
 					return;
 				}
 
@@ -109,7 +111,7 @@ public class ComandoAbrirConta implements Comando {
 
 				} catch (Exception ex) {
 					BotManager.enviarMensagem(cliente.getChatId(),
-							"Data de nascimento InvÃ¡lida! Digite novamente (dd/MM/aaaa) !");
+							"Data de nascimento Inválida! Digite novamente (dd/MM/aaaa) !");
 					return;
 				}
 			}
