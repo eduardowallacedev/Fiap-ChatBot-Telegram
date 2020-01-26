@@ -5,8 +5,7 @@ import java.time.LocalDateTime;
 
 import org.prevayler.Prevayler;
 import org.prevayler.PrevaylerFactory;
-
-import br.fiap.telegram.DAO.ClientesDaoPrevayler;
+import br.fiap.telegram.DAO.ClientesDAO;
 import br.fiap.telegram.config.BotConfig;
 import br.fiap.telegram.model.Cliente;
 import br.fiap.telegram.utils.ListaCliente;
@@ -30,7 +29,7 @@ public class SessionManager {
 	public static void addClient(Cliente cliente) throws Exception {
 
 		cliente.setLastUpdate(LocalDateTime.now());
-		getPrevayler().execute(new ClientesDaoPrevayler(cliente));
+		getPrevayler().execute(new ClientesDAO(cliente));
 
 	}
 
