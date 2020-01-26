@@ -1,4 +1,4 @@
-package br.fiap.telegram.command;
+package br.fiap.telegram.options;
 
 import br.fiap.telegram.model.Cliente;
 

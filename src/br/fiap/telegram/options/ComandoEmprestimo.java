@@ -1,5 +1,5 @@
 
-package br.fiap.telegram.command;
+package br.fiap.telegram.options;
 
 import br.fiap.telegram.manager.BotManager;
 import br.fiap.telegram.manager.SessionManager;

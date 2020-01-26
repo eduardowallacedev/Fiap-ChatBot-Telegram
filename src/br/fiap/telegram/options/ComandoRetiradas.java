@@ -1,4 +1,5 @@
-package br.fiap.telegram.command;
+
+package br.fiap.telegram.options;
 
 import java.util.List;
 
@@ -7,21 +8,24 @@ import br.fiap.telegram.manager.SessionManager;
 import br.fiap.telegram.model.Cliente;
 import br.fiap.telegram.model.Lancamento;
 
-public class ComandoExtrato implements Comando {
+public class ComandoRetiradas implements Comando {
 
 	@Override
 	public void processar(Cliente cliente) throws Exception {
 
 		if (!clientePossuiConta(cliente)) {
 			BotManager.enviarMensagem(cliente.getChatId(),
-					"Você não possui conta cadastrada!" + "\nCrie uma conta antes de continuar. /abrirconta");
+			        "Você não possui conta cadastrada!" + "\nCrie uma conta antes de continuar. /abrirconta");
 			cliente.setComandoAtual(null);
+
 			SessionManager.addClient(cliente);
+
 			ComandoStart.mostrarMenu(cliente);
 			return;
+
 		}
 
-		exibirExtrato(cliente);
+		retiradas(cliente);
 
 	}
 
@@ -29,31 +33,29 @@ public class ComandoExtrato implements Comando {
 		return cliente.getConta() != null;
 	}
 
-	private void exibirExtrato(Cliente cliente) throws Exception {
+	private void retiradas(Cliente cliente) throws Exception {
 
-		List<Lancamento> extrato = cliente.getConta().extrato();
+		List<Lancamento> retiradas = cliente.getConta().retiradas();
 
-		if (!extrato.isEmpty()) {
+		if (retiradas != null && !retiradas.isEmpty()) {
 
+			double somaRetiradas = 0f;
 			StringBuilder sb = new StringBuilder();
 
-			for (Lancamento lc : extrato) {
+			for (Lancamento lc : retiradas) {
+
 				sb.append(lc.getExtrato());
 				sb.append("\n");
+
+				somaRetiradas += lc.getValor();
 			}
 
-			sb.append("Saldo atual: R$ " + cliente.getConta().getSaldo());
+			sb.append("\nTotal Retiradas: R$ " + somaRetiradas);
 
 			BotManager.enviarMensagem(cliente.getChatId(), sb.toString());
 
 		} else {
-
-			if (cliente.getConta().getSaldo() < 1f) {
-				BotManager.enviarMensagem(cliente.getChatId(),
-						"Saldo insuficiente para o extrato! :(\nSaldo atual: R$ " + cliente.getConta().getSaldo());
-			} else {
-				BotManager.enviarMensagem(cliente.getChatId(), "não há informações para exibir");
-			}
+			BotManager.enviarMensagem(cliente.getChatId(), "Você não possui retiradas!");
 		}
 
 		cliente.setMensagemAtual(null);

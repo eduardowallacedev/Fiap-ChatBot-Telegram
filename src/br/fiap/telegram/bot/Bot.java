@@ -6,11 +6,11 @@ import com.pengrad.telegrambot.model.Message;
 import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.request.GetUpdates;
 
-import br.fiap.telegram.command.Comando;
-import br.fiap.telegram.command.CommandFactory;
 import br.fiap.telegram.manager.BotManager;
 import br.fiap.telegram.manager.SessionManager;
 import br.fiap.telegram.model.Cliente;
+import br.fiap.telegram.options.Comando;
+import br.fiap.telegram.options.CommandFactory;
 
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -20,101 +20,100 @@ import java.util.logging.Logger;
 
 public class Bot {
 
-    private static final Logger LOGGER = Logger.getGlobal();
+	private static final Logger LOGGER = Logger.getGlobal();
 
-    private TelegramBot bot;
-    private int offset;
+	private TelegramBot bot;
+	private int offset;
 
-    public Bot() {
+	public Bot() {
 
-	LOGGER.log(Level.INFO, "Iniciando bot...");
+		LOGGER.log(Level.INFO, "Iniciando bot...");
 
-	this.bot = BotManager.getBotInstance();
-	List<Update> updates = bot.execute(new GetUpdates().offset(offset)).updates();
+		this.bot = BotManager.getBotInstance();
+		List<Update> updates = bot.execute(new GetUpdates().offset(offset)).updates();
 
-	if (updates != null && !updates.isEmpty()) {
-	    setProximoOffset(updates.get(updates.size() - 1));
+		if (updates != null && !updates.isEmpty()) {
+			setProximoOffset(updates.get(updates.size() - 1));
+		}
+
+		LOGGER.log(Level.INFO, "Bot inicializado com sucesso!");
 	}
 
-	LOGGER.log(Level.INFO, "Bot inicializado com sucesso!");
-    }
+	private void setProximoOffset(Update u) {
+		offset = u.updateId() + 1;
+	}
 
-    private void setProximoOffset(Update u) {
-	offset = u.updateId() + 1;
-    }
+	/**
+	 * Instancia uma nova Thread
+	 */
 
-    /**
-     * Executa a Thread
-     */
+	public void run() {
 
-    public void run() {
+		ExecutorService es = Executors.newCachedThreadPool();
 
-	ExecutorService es = Executors.newCachedThreadPool();
+		while (true) {
 
-	while (true) {
+			try {
+				List<Update> updates = getUpdates();
+				updates.forEach(update -> es.execute(() -> processaMensagem(update.message())));
+			} catch (Exception ex) {
+				LOGGER.log(Level.SEVERE, ex.getMessage(), ex);
+			}
 
-	    try {
-		List<Update> updates = getUpdates();
-		updates.forEach(update -> es.execute(() -> processaMensagem(update.message()))); // processamento em
-												 // paralelo
-	    } catch (Exception ex) {
-		LOGGER.log(Level.SEVERE, ex.getMessage(), ex);
-	    }
+		}
 
 	}
 
-    }
+	/**
+	 * Busca a última mensagem
+	 */
+	public List<Update> getUpdates() {
 
-    /**
-     * LÃª mensagem
-     */
-    public List<Update> getUpdates() {
+		List<Update> updates = null;
 
-	List<Update> updates = null;
+		while (updates == null || updates.isEmpty()) {
 
-	while (updates == null || updates.isEmpty()) {
+			updates = bot.execute(new GetUpdates().offset(offset)).updates();
 
-	    updates = bot.execute(new GetUpdates().offset(offset)).updates();
+			if (!updates.isEmpty()) {
+				setProximoOffset(updates.get(updates.size() - 1));
+				return updates;
+			}
 
-	    if (!updates.isEmpty()) {
-		setProximoOffset(updates.get(updates.size() - 1));
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+
 		return updates;
-	    }
 
-	    try {
-		Thread.sleep(1000);
-	    } catch (InterruptedException e) {
-		e.printStackTrace();
-	    }
 	}
 
-	return updates;
+	/**
+	 * Processa a mensagem
+	 * 
+	 * @param mensagem
+	 */
+	public void processaMensagem(Message mensagem) {
 
-    }
+		Cliente cliente;
+		try {
+			cliente = SessionManager.getClient(mensagem.from().id());
 
-    /**
-     * Processa mensagem
-     * 
-     * @param mensagem
-     */
-    public void processaMensagem(Message mensagem) {
+			LOGGER.log(Level.INFO, "Processando mensagem : " + cliente.toString());
 
-	Cliente cliente;
-	try {
-	    cliente = SessionManager.getClient(mensagem.from().id());
+			cliente.setMensagemAtual(mensagem.text());
+			SessionManager.addClient(cliente);
+			Comando comando = CommandFactory.getComando(cliente);
+			comando.processar(cliente);
 
-	    LOGGER.log(Level.INFO, "Processando mensagem : " + cliente.toString());
+		} catch (Exception ex) {
+			LOGGER.log(Level.SEVERE, ex.getMessage(), ex);
+			;
+		}
 
-	    cliente.setMensagemAtual(mensagem.text());
-	    SessionManager.addClient(cliente);
-	    Comando comando = CommandFactory.getComando(cliente);
-	    comando.processar(cliente);
-
-	} catch (Exception ex) {
-	    LOGGER.log(Level.SEVERE, ex.getMessage(), ex);
-	    ;
 	}
-
-    }
 
 }

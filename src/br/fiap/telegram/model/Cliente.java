@@ -4,13 +4,11 @@ package br.fiap.telegram.model;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Cliente extends Pessoa implements Serializable {
 
 	private static final long serialVersionUID = 2790864233946864001L;
-	
+
 	private long chatId;
 	private String comandoAtual;
 	private String estadoAtual;
@@ -19,13 +17,12 @@ public class Cliente extends Pessoa implements Serializable {
 
 	private Conta conta;
 
-
-	public Cliente() {}
+	public Cliente() {
+	}
 
 	public Cliente(String nome, long cpf, String rg, LocalDate dataNascimento) {
 		super(nome, cpf, rg, dataNascimento);
 	}
-
 
 	public long getChatId() {
 		return chatId;
@@ -67,7 +64,6 @@ public class Cliente extends Pessoa implements Serializable {
 		this.conta = conta;
 	}
 
-
 	public LocalDateTime getLastUpdate() {
 		return lastUpdate;
 	}
@@ -78,9 +74,7 @@ public class Cliente extends Pessoa implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Cliente [chatId=" + chatId +", mensagemAtual=" + mensagemAtual + ", lastUpdate=" + lastUpdate + "]";
+		return "Cliente [chatId=" + chatId + ", mensagemAtual=" + mensagemAtual + ", lastUpdate=" + lastUpdate + "]";
 	}
-	
-	
-	
+
 }

@@ -1,4 +1,4 @@
-package br.fiap.telegram.command;
+package br.fiap.telegram.options;
 
 import com.pengrad.telegrambot.model.request.Keyboard;
 import com.pengrad.telegrambot.model.request.ReplyKeyboardMarkup;

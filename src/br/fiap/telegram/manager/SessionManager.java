@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 import org.prevayler.Prevayler;
 import org.prevayler.PrevaylerFactory;
 
-import br.fiap.telegram.constants.BotConstants;
+import br.fiap.telegram.config.BotConfig;
 import br.fiap.telegram.model.Cliente;
 import br.fiap.telegram.prevayler.ClientesDaoPrevayler;
 import br.fiap.telegram.utils.ListaCliente;
@@ -36,7 +36,7 @@ public class SessionManager {
 
 	private static Prevayler<ListaCliente> getPrevayler() throws Exception {
 		PrevaylerFactory<ListaCliente> factory = new PrevaylerFactory<>();
-		factory.configurePrevalenceDirectory(BotConstants.BOT_DB_DIRECTORY);
+		factory.configurePrevalenceDirectory(BotConfig.BOT_DB_DIRECTORY);
 		factory.configurePrevalentSystem(new ListaCliente());
 		return factory.create();
 
