@@ -12,22 +12,18 @@ public class Conta implements Serializable {
 
 	private static final long serialVersionUID = -8657794166473065263L;
 
-	// Dados Cadastrais da conta
+	// Dados
 	private int numAg;
 	private int numCc;
 	private List<Lancamento> lancamentos = new ArrayList<>();
-	private List<Emprestimo> emprestimos = new ArrayList<>();
-	
-	private transient Emprestimo emprestimo = new Emprestimo(); // emprestimo usado para manter memoria
-
-	// Dados financeiros da conta
 	private double saldo;
 
+	
+	// Métodos e operacoes
 	public Conta() {
 		this.numAg = new Random().nextInt(9999);
 		this.numCc = new Random().nextInt(999999);
 		this.lancamentos = new ArrayList<>();
-		this.emprestimos = new ArrayList<>();
 		this.saldo = 0f;
 	}
 
@@ -59,19 +55,6 @@ public class Conta implements Serializable {
 		this.lancamentos.add(lancamento);
 	}
 
-	public List<Emprestimo> getEmprestimos() {
-		return emprestimos;
-	}
-
-	public void setEmprestimos(List<Emprestimo> emprestimos) {
-		this.emprestimos = emprestimos;
-	}
-
-	public void addEmprestimo(Emprestimo emprestimo) {
-		depositar("Depï¿½sito Emprï¿½stimo", emprestimo.getValorContratado());
-		this.emprestimos.add(emprestimo);
-	}
-
 	public void setLancamentos(List<Lancamento> lancamentos) {
 		this.lancamentos = lancamentos;
 	}
@@ -84,16 +67,8 @@ public class Conta implements Serializable {
 		this.saldo = saldo;
 	}
 
-	 public Emprestimo getEmprestimo() {
-	 return emprestimo;
-	 }
-	
-	 public void setEmprestimo(Emprestimo emprestimo) {
-	 this.emprestimo = emprestimo;
-	 }
-
 	public synchronized void depositar(double valor) {
-		depositar("Depï¿½sito", valor);
+		depositar("Depósito", valor);
 	}
 
 	private synchronized void depositar(String descricao, double valor) {
@@ -127,7 +102,7 @@ public class Conta implements Serializable {
 
 			extrato = lancamentos.stream()
 			        .filter(o -> o.getDescricao().startsWith("Saque")
-			                || o.getDescricao().startsWith("Depï¿½sito")
+			                || o.getDescricao().startsWith("Depósito")
 			                || o.getDescricao().startsWith("Extrato"))
 			        .collect(Collectors.toList());
 		}
