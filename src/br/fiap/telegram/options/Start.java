@@ -12,8 +12,7 @@ public class Start implements Opcoes{
     @Override
     public void processar(Cliente cliente) {
 
-        String msg = "Bem vindo ao Wallace Bank.\n" +
-                "O que podemos fazer por você hoje?";
+        String msg = "Bem vindo ao Wallace Bank.\n";
 
         BotManager.enviarMensagem(cliente.getChatId(), msg);
         mostrarMenu(cliente);
@@ -30,8 +29,7 @@ public class Start implements Opcoes{
 
                 new String[]{ Enum.ABRIR_CONTA.codigo, Enum.MODIFICAR_CONTA.codigo },
                 new String[]{ Enum.DEPOSITO.codigo, Enum.SAQUE.codigo },
-                new String[]{ Enum.EXTRATO.codigo},
-                new String[]{ Enum.LANCAMENTOS.codigo },
+                new String[]{ Enum.EXTRATO.codigo, Enum.LANCAMENTOS.codigo},                
                 new String[]{ Enum.RETIRADAS.codigo, Enum.TARIFAS.codigo },
                 new String[]{ Enum.AJUDA.codigo });
 
