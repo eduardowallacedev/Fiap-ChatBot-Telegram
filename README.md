@@ -1,33 +1,31 @@
 # Projeto FIAP ChatBot com Telegram
 Projeto Java Platform - ChatBot 
 
-Elaborado em Novembro de 2019
+Elaborado em Dezembro de 2019
 
-# Objetivo
-
-O objetivo deste projeto √© criar um bot com o Telegram que simule um assistente pessoal de um banco.
-Ser√£o implementados os comportamentos b√°sicos de um banco, como depositar,sacar,abrir conta, dentre outras funcionalidades.
+Este projeto foi criado para implementar um bot integrado com o Telegram que simule um assistente pessoal de um banco.
+Foram disponibilizados os comportamentos b·sicos de um banco, como depositar,sacar,abrir conta e consultar o extrato.
 
 # 2. Componentes e Frameworks
 
 # Maven
-O Maven √© uma ferramenta para gerenciamento das bibliotecas e plug-ins de
-um ou mais reposit√≥rios de forma din√¢mica utilizando um XML para descrever o projeto.
+O Maven È uma ferramenta para gerenciamento das bibliotecas e plug-ins de
+um ou mais repositÛrios de forma din‚mica utilizando XML para descrever o projeto.
 
 # Java API for Telegram
 O Java API for Telegram possibilita o desenvolvimento de um bot personalizado conforme a necessidade do projeto.
-Website da API:
+Link da API:
 [https://oss.sonatype.org/content/repositories/releases/com/github/pengrad/java-telegram-bot-api/2.1.2/](https://oss.sonatype.org/content/repositories/releases/com/github/pengrad/java-telegram-bot-api/2.1.2/)
 
 # Prevlayer
-Api de persist√™ncia usada para persistir os dados em arquivo conforme documento de requisitos.
+Api de persistÍncia usada para persistir os dados em arquivo.
 
 [http://prevlayer.org/](http://prevlayer.org/)
 
 [https://mvnrepository.com/artifact/org.prevayler](https://mvnrepository.com/artifact/org.prevayler)
 
 # Java Logging
-Ferramenta padr√£o de log do java em Console.
+Ferramenta de log para Console.
 
 [https://docs.oracle.com/javase/7/docs/api/java/util/logging/package-summary.html](https://docs.oracle.com/javase/7/docs/api/java/util/logging/package-summary.html)
 
@@ -38,61 +36,56 @@ Ferramenta padr√£o de log do java em Console.
  - Pacote principal com os arquivos do projeto.
 
  fiap.chatbot.bot
- - Pacote com a intelig√™ncia do Bot para buscar as mensagens do telegram.
+ - Pacote para buscar as mensagens do telegram.
 
- fiap.chatbot.command
+ fiap.chatbot.options
  - Pacote com todas as classes de comandos a serem executados.
 
- fiap.chatbot.comparator
- - Pacote com o comparator de cliente.
-
- fiap.chatbot.constants
- - Pacote de constantes
+ fiap.chatbot.config
+ - Pacote de constantes e configuraÁıes da integraÁ„o com o bot do telegram.
 
  fiap.chatbot.manager
- - Pacote com o gerenciador de envio de mensagens ao telegram e gerenciamento da sess√£o do cliente.
+ - Pacote com o gerenciador de envio de mensagens ao telegram e gerenciamento da sessıes online.
 
  fiap.chatbot.model
  - Pacote com a camada model
 
- fiap.chatbot.prevayler
- - Pacote prevlayer de persist√™ncia em arquivo.
+ fiap.chatbot.DAO
+ - Pacote de persistÍncia em arquivo.
 
  fiap.chatbot.utils
  - Pacote de Utilidades
 
 
-# 4. Pr√©-requisitos
- - Tecnologias necess√°rias.
+# 4. PrÈ-requisitos
+ - Tecnologias necess·rias.
  
-    1- Para executar o projeto √© necess√°rio ter o JRE 8 ou JDK 8 instalado.
+    1- Para executar o projeto, ser· necess√°rio ter o JRE 8 ou JDK 8 instalado.
  
-    	2- Utilizar uma ide para execu√ß√£o. (Recomendo o Eclipse)
+    2- Utilizar uma ide para execuÁ„o. (Recomendo o Eclipse)
  
  
-# 5. Utiliza√ß√£o do Bot
+# 5. UtilizaÁ„o do Bot
 
 - Funcionalidades
 
- - Para Utiliza√ß√£o do bot, enviar o comando /start para o bot com o nome @WallaceBankBot.
- - Tela de boas-vindas do banco
- - Cria√ß√£o de conta
- - Modifica√ß√£o de conta
- - Exibi√ß√£o dos dados do titular 
- - Dep√≥sito
- - Saque (Desconta Taxa)
- - Solicita√ß√£o de extrato (Desconta Taxa)
- - Solicita√ß√£o de empr√©stimo
- - Exibi√ß√£o de saldo devedor do empr√©stimo e prazo de pagamento
- - Exibi√ß√£o dos lan√ßamentos detalhada com total
- - Exibi√ß√£o das retiradas com total
- - Exibi√ß√£o das tarifas de servi√ßos, com total dos servi√ßos utilizados
+ - Para UtilizaÁ„o do bot, enviar o comando /start para o bot com o nome configurado em BOT_NOME na classe BotConfig;
+ - Ao executar a aplicaÁ„o, ser· exido uma tela inicial de boas-vindas;
+ - CriaÁ„o de conta
+ - ModificaÁ„o de conta
+ - ExibiÁ„o dos dados do titular 
+ - DepÛsito
+ - Saque (Desconta Tarifa)
+ - Extrato (Desconta Tarifa)
+ - Exibe os lanÁamentos detalhada com total
+ - Exibe as retiradas com total
+ - Exibe as tarifas com total dos serviÁos utilizados
  - Tela de ajuda
  
 
 # Executando o projeto
 
-Acessar o diret√≥rio **src** no pacote **br.fiap.chatbot** existe um arquivo chamado **Main.java** . Abra esse arquivo e execute **Run**
+Acessar o diretÛrio **src** no pacote **br.fiap.telegram** existe um arquivo chamado **Main.java** . Abra esse arquivo e execute **Run**
 
  
 # Javadoc
@@ -100,9 +93,9 @@ Acessar o diret√≥rio **src** no pacote **br.fiap.chatbot** existe um arquivo cha
 [Acesse clicando aqui](doc/index.html)
 
 
-# Refer√™ncias
+# ReferÍncias
 
-- Documenta√ß√£o do Telegram utilizada
+- DocumentaÁ„o do Telegram utilizada
 
   [https://core.telegram.org/bots](https://core.telegram.org/bots)
   	
