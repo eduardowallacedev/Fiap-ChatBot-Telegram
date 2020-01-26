@@ -9,7 +9,6 @@ import com.pengrad.telegrambot.request.GetUpdates;
 import br.fiap.telegram.manager.BotManager;
 import br.fiap.telegram.manager.SessionManager;
 import br.fiap.telegram.model.Cliente;
-import br.fiap.telegram.options.Comando;
 import br.fiap.telegram.options.Factory;
 
 import java.util.List;
@@ -66,6 +65,7 @@ public class Bot {
 
 	/**
 	 * Busca a última mensagem
+	 * @return lista
 	 */
 	public List<Update> getUpdates() {
 

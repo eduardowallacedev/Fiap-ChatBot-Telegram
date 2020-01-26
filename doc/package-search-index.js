@@ -1,1 +1,1 @@
-packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"br.fiap.telegram.manager"}]
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"br.fiap.telegram.bot"}]

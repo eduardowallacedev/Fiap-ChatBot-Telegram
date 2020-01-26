@@ -1,1 +1,1 @@
-typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"br.fiap.telegram.manager","l":"BotManager"},{"p":"br.fiap.telegram.manager","l":"SessionManager"}]
+typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"br.fiap.telegram.bot","l":"Bot"}]
