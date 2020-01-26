@@ -1,5 +1,5 @@
 
-package br.fiap.telegram.comparator;
+package br.fiap.telegram.utils;
 
 import java.util.Comparator;
 

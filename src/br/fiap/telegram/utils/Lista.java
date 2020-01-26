@@ -7,7 +7,7 @@ import java.util.List;
 public abstract class Lista<T> implements Serializable {
 
 	private static final long serialVersionUID = 2108872808565294804L;
-	
+
 	protected List<T> lista = new ArrayList<>();
 
 	public void adicionar(T entidade) {

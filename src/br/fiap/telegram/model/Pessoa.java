@@ -5,16 +5,17 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public abstract class Pessoa  implements Serializable {
+public abstract class Pessoa implements Serializable {
 
 	private static final long serialVersionUID = -3795755677675109886L;
-	
+
 	private String nome;
 	private long cpf;
 	private String rg;
 	private LocalDate dataNascimento;
 
-	public Pessoa() {}
+	public Pessoa() {
+	}
 
 	public Pessoa(String nome, long cpf, String rg, LocalDate dataNascimento) {
 		this.nome = nome;
@@ -99,7 +100,5 @@ public abstract class Pessoa  implements Serializable {
 			return false;
 		return true;
 	}
-	
-	
 
 }
