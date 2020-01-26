@@ -4,7 +4,7 @@ import br.fiap.telegram.manager.BotManager;
 import br.fiap.telegram.manager.SessionManager;
 import br.fiap.telegram.model.Cliente;
 
-public class ComandoAjuda implements Comando {
+public class ComandoAjuda implements Opcoes {
 
 	@Override
 	public void processar(Cliente cliente) throws Exception {
